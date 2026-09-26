@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const USERS_FILE = path.join(__dirname, 'users.json');
 const MESSAGES_FILE = path.join(__dirname, 'messages.json');
 // Аватар (base64 dataURL) до 10 МБ раздувается примерно в ~1.37 раза в JSON,
@@ -378,7 +378,7 @@ const server = http.createServer(function (req, res) {
     sendJSON(res, 404, { error: 'Не найдено' });
 });
 
-server.listen(PORT, function () {
+server.listen(PORT, '0.0.0.0', function () {
     console.log('');
     console.log('🔥 Сервер Hot запущен!');
     console.log('👉 Открой: http://localhost:' + PORT);
